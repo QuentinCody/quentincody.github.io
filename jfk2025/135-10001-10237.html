@@ -1,0 +1,648 @@
+<style>
+    /* CSS Variables */
+    :root {
+      --color-black: #000000;
+      --color-gray-light: #f0f0f0;
+      --color-gray-dark: #555555;
+      --spacing-small: 0.25rem;
+      --spacing-medium: 0.5rem;
+      --spacing-large: 1rem;
+      --font-family-primary: sans-serif;
+      --font-size-base: 1rem;
+      --font-size-small: 0.8rem;
+      --font-size-large: 1.2rem;
+      --line-height-base: 1.5;
+    }
+    
+    /* General Styles */
+    body {
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-base);
+      color: var(--color-black);
+      margin: 0;
+      padding: var(--spacing-large);
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: bold;
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+    }
+    
+    h3{
+      font-size: 1.5rem;
+    }
+    
+    h4 {
+      font-size: 1.25rem;
+    }
+    
+    h5 {
+      font-size: 1.1rem;
+    }
+    
+    h6 {
+      font-size: 1rem;}
+    
+    p {
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    /* Links */
+    a {
+      color: blue;
+      text-decoration: none;
+    }
+    
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+    
+    /* Lists*/
+    ul, ol {
+      margin-bottom: var(--spacing-medium);
+      padding-left: var(--spacing-large);
+    }
+    
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--spacing-large);
+    }
+    
+    th,
+    td {
+      border: 1px solid var(--color-gray-dark);
+      padding: var(--spacing-small);
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--color-gray-light);
+      font-weight: bold;
+    }
+    
+    /* Forms */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: var(--spacing-small);
+      border: 1px solid var(--color-gray-dark);
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    button:hover,
+    button:focus {
+      opacity: 0.8;
+    }
+    
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-large);
+    }
+    
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap:var(--spacing-large);
+    }
+    
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* Specific Styles */
+    .header {
+      text-align: center;
+      margin-bottom: var(--spacing-large);
+    }
+    
+    .header-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    
+    .highlighted-text {
+      background-color: yellow;
+      padding: var(--spacing-small);
+    }
+    
+    .footer{
+      text-align: center;
+      margin-top: var(--spacing-large);
+      font-size: var(--font-size-small);
+      color: var(--color-gray-dark);
+    }
+    
+    .qr-code-placeholder {
+      width: 100px;height: 100px;
+      background-color: var(--color-gray-light);
+      border: 1px solid var(--color-gray-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: var(--font-size-small);
+      color: var(--color-gray-dark);
+      margin: var(--spacing-medium) auto;
+    }
+    
+    /* Styles specific to the document */
+    .identification-form {
+      margin-bottom: var(--spacing-large);}
+    
+    .agency-information,
+    .document-information {
+      margin-bottom: var(--spacing-large);
+    }
+    
+    .agency-information h2,
+    .document-information h2 {
+      font-size: 1.3rem;
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    .record-number,
+    .records-series,
+    .agency-file-number,
+    .originator,
+    .from,
+    .to,
+    .title,
+    .date,
+    .pages,
+    .subjects,
+    .document-type,
+    .classification,
+    .restrictions,
+    .current-status,
+    .date-of-last-review,
+    .opening-criteria,
+    .comments {
+      margin-bottom: var(--spacing-small);
+    }
+    
+    .handwritten-notes {
+      font-style: italic;
+    }
+    
+    .released-under {font-size: var(--font-size-small);
+      text-align: center;
+      margin-top: var(--spacing-large);
+    }
+    
+    .item-restricted {
+      text-align: center;
+      font-weight: bold;
+      margin-top: var(--spacing-large);
+    }
+    
+    /* Page Specific Styles */
+    .page-number {
+      text-align: right;
+      font-size: var(--font-size-small);
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    /* Additional Styles for OCR Content */
+    .ocr-text {
+      white-space: pre-wrap; /* Preserve line breaks */
+    }
+    
+    /* Style for text that needs to be rotated */
+    .rotated-text {
+      transform: rotate(-90deg); /* Rotate 90 degrees counter-clockwise */
+      transform-origin: topleft; /* Set the origin for rotation */
+      position: absolute; /* Allows precise placement */
+    }
+    
+    /* Style for text that needs to be skewed */
+    .skewed-text {
+      transform: skewX(-20deg); /* Skew along the X-axis by 20 degrees*/
+      display: inline-block; /* Allows width/height to be applied */
+    }
+    
+    /* Style for elements with a box shadow */
+    .shadowed-element {
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);/* Horizontal offset, vertical offset, blur radius, color */
+    }
+    
+    /* Style for elements with rounded corners */
+    .rounded-corners {
+      border-radius: 10px; /* Adjust the radius as needed */
+    }
+    
+    /* Style for elements with a gradient background */
+    .gradient-background {background: linear-gradient(to right, #4CAF50, #8BC34A); /* Example gradient */
+      color: white; /* Ensure text is readable */
+      padding: var(--spacing-medium);
+    }
+    
+    /* Style for elements that need absolute positioning */
+    .absolute-position {
+      position: absolute;
+      top: 50px; /* Example: 50px from the top */
+      left: 50px; /* Example: 50px from the left */
+    }
+    
+    /* Style for elements that need relative positioning */
+    .relative-position {
+      position: relative;
+      /* Add any offsets or adjustments as needed */
+    }
+    
+    /* Style for small text */
+    .small-text {
+      font-size: var(--font-size-small);
+    }
+    
+    /* Style for large text */
+    .large-text {font-size: var(--font-size-large);
+    }
+    
+    /* Style for bold text */
+    .bold-text {
+      font-weight: bold;
+    }
+    
+    /* Style for italic text */
+    .italic-text {
+      font-style: italic;
+    }
+    
+    /* Stylefor underlined text */
+    .underlined-text {
+      text-decoration: underline;
+    }
+    
+    /* Style for centered text */
+    .centered-text {
+      text-align: center;
+    }
+    
+    /* Style for right-aligned text */
+    .right-aligned-text {
+      text-align: right;
+    }
+    
+    /* Style for justified text */
+    .justified-text {
+      text-align: justify;
+    }
+    
+    /* Style for code snippets */
+    .code-snippet {
+      background-color: var(--color-gray-light);
+      padding: var(--spacing-small);
+      font-family: monospace;
+      border: 1px solid var(--color-gray-dark);
+      overflow-x: auto; /* Add horizontal scroll if needed */
+    }
+    
+    /* Style for blockquotes */
+    blockquote {
+      margin: var(--spacing-medium);
+      padding:var(--spacing-medium);
+      border-left: 5px solid var(--color-gray-dark);
+      font-style: italic;
+    }
+    
+    /* Style for horizontal rules */
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: var(--color-gray-dark);
+      margin: var(--spacing-large) 0;
+    }
+    
+    /* Style for images */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Style for captions */
+    figcaption {
+      font-size: var(--font-size-small);
+      text-align: center;
+      margin-top: var(--spacing-small);
+      color: var(--color-gray-dark);
+    }
+    
+    /* Style for abbreviations */
+    abbr {
+      border-bottom: 1px dotted var(--color-gray-dark);
+      cursor: help;
+    }
+    
+    /* Style for definitions */
+    dfn {
+      font-style: italic;
+      font-weight: bold;
+    }
+    
+    /* Style for keyboard input */
+    kbd {
+      background-color: var(--color-gray-light);padding: var(--spacing-small);
+      border: 1px solid var(--color-gray-dark);
+      font-family: monospace;
+    }
+    
+    /* Style for sample output */
+    samp {
+      font-family: monospace;
+    }
+    
+    /* Style for variables */
+    var {
+      font-style: italic;
+    }
+    
+    /* Style for citations */
+    cite {
+      font-style: italic;
+    }
+    
+    /* Style for inserted text */
+    ins {
+      background-color: #d4edda;
+      color: #155724;
+      text-decoration:none;
+    }
+    
+    /* Style for deleted text */
+    del {
+      background-color: #f8d7da;
+      color: #721c24;
+      text-decoration: line-through;
+    }
+    
+    /* Style for mark (highlighted) text */
+    mark{
+      background-color: #ffc107;
+      padding: 0.2em;
+    }
+    
+    /* Style for ruby text */
+    ruby {
+      display: inline-block;
+    }
+    
+    /* Style for rt (ruby text annotation) */
+    rt {
+      font-size: var(--font-size-small);
+    }
+    
+    /* Style for rp (ruby parenthesis) */
+    rp {
+      display: none; /* Hide parentheses if ruby is supported */
+    }
+    
+    /* Style for details element */
+    details {
+      margin-bottom: var(--spacing-medium);
+    }
+    
+    /*Style for summary element */
+    summary {
+      padding: var(--spacing-small);
+      cursor: pointer;
+      background-color: var(--color-gray-light);
+      border: 1px solid var(--color-gray-dark);
+    }
+    
+    /* Style for meter element */
+    meter{
+      width: 100%;
+    }
+    
+    /* Style for progress element */
+    progress {
+      width: 100%;
+    }
+    
+    /* Style for time element */
+    time {
+      font-style: italic;
+    }
+    
+    /* Style for wbr (word break opportunity) */
+    wbr{
+      /* Allows line breaks within long words */
+    }
+    
+    /* Style for bdi (bidirectional isolation) */
+    bdi {
+      unicode-bidi: isolate;
+    }
+    
+    /* Style for bdo (bidirectional override) */
+    bdo {
+      direction: rtl; /* Orltr */
+    }
+    
+    /* Style for small caps text */
+    .small-caps {
+      font-variant: small-caps;
+    }
+    
+    /* Style for uppercase text */
+    .uppercase {
+      text-transform: uppercase;
+    }
+    
+    /* Style for lowercase text */
+    .lowercase {text-transform: lowercase;
+    }
+    
+    /* Style for capitalized text */
+    .capitalized {
+      text-transform: capitalize;
+    }
+    
+    /* Style for no wrap text */
+    .no-wrap {
+      white-space: nowrap;
+    }
+    
+    /* Style for preformatted text */
+    pre{
+      white-space: pre-wrap;
+      font-family: monospace;
+      background-color: var(--color-gray-light);
+      padding: var(--spacing-small);
+      border: 1px solid var(--color-gray-dark);
+      overflow-x:auto;
+    }
+    
+    /* Style for horizontal scrolling container */
+    .horizontal-scroll {
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    
+    /* Style for vertical scrolling container */
+    .vertical-scroll {
+      overflow-y: auto;
+      height: 300px; /* Adjust height as needed */
+    }
+    
+    /* Style for disabled elements */
+    :disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    /* Style for required fields */
+    :required {
+      border-color: #dc3545; /* Red */
+    }
+    
+    /* Style for valid fields */
+    :valid {
+      border-color: #28a745; /* Green */
+    }
+    
+    /* Style for invalid fields */
+    :invalid {
+      border-color: #dc3545; /* Red */
+    }/* Style for placeholder text */
+    ::placeholder {
+      color: var(--color-gray-dark);
+      font-style: italic;
+    }
+    
+    /* Style for selection */
+    ::selection {
+      background-color: #ffc107; /* Yellow */
+      color: var(--color-black);
+    }
+    
+    /* Style for scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background:#888;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    /* Style for print media */
+    @media print {
+      body {
+        font-size: 12pt;
+        line-height: 1.2;
+      }
+    
+      .no-print {
+        display: none;
+      }
+    
+      a {
+        text-decoration: none !important;
+        color: black !important;
+      }
+    }
+    
+    /* Style for dark mode */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #333;
+        color: #fff;
+      }
+    
+      a {
+        color: #8ab4f8;
+      }
+    
+      th {
+        background-color: #444;color: #fff;
+      }
+    
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        background-color: #444;
+        color: #fff;
+        border-color: #666;
+      }
+    
+      ::placeholder {color: #888;
+      }
+    }
+    </style><div class="page-number right-aligned-text" contenteditable="false">Date: 09/02/94 Page: 1</div>
+    
+    <header class="header centered-text">
+    <h1 class="header-title" contenteditable="false">JFK ASSASSINATION SYSTEM</h1>
+    <h2 contenteditable="false">IDENTIFICATION FORM</h2>
+    </header>
+    
+    <section class="agency-information">
+    <h3 contenteditable="false">AGENCY INFORMATION</h3>
+    <div class="record-number" contenteditable="false">AGENCY : HPSCI</div>
+    <div class="record-number" contenteditable="false">RECORD NUMBER : 135-10001-10237</div>
+    <div class="records-series" contenteditable="false">RECORDS SERIES :</div>
+    <div class="agency-file-number" contenteditable="false">AGENCY FILE NUMBER :</div>
+    </section>
+    
+    <section class="document-information">
+    <h3 contenteditable="false">DOCUMENT INFORMATION</h3>
+    <div class="originator" contenteditable="false">ORIGINATOR :</div>
+    <div class="from" contenteditable="false">FROM :</div>
+    <div class="to" contenteditable="false">TO :</div>
+    <div class="title" contenteditable="false">TITLE :</div>
+    <div class="date" contenteditable="false">DATE : 04/29/75</div>
+    <div class="pages" contenteditable="false">PAGES : 2</div>
+    <div class="subjects" contenteditable="false">SUBJECTS :</div>
+    <div class="handwritten-notes" contenteditable="false">HANDWRITTEN NOTES: TELEPHONE CALL WITH STURGIS ON 4-29-75.</div>
+    <div class="document-type" contenteditable="false">DOCUMENT TYPE : PAPER, TEXTUAL DOCUMENT</div>
+    <div class="classification" contenteditable="false">CLASSIFICATION : U</div>
+    <div class="restrictions" contenteditable="false">RESTRICTIONS : OPEN IN FULL</div>
+    <div class="current-status" contenteditable="false">CURRENT STATUS : O</div>
+    <div class="date-of-last-review" contenteditable="false">DATE OF LAST REVIEW : 09/02/94</div>
+    <div class="opening-criteria" contenteditable="false">OPENING CRITERIA :</div>
+    <div class="comments" contenteditable="false">COMMENTS :</div>
+    <div contenteditable="false">CONTAINED IN FILE ENTITLED, "STURGIS, FRANK" "O/R-I (OO)"</div>
+    <div contenteditable="false">SANITIZED BY CIA.</div>
+    </section>
+    
+    <div class="released-under" contenteditable="false">Released under the John F. Kennedy Assassination Records Collection Act of 1992 (44 USC 2107 Note). Case#: RD 78141 Date: 02-27-2024.</div>
+    
+    <div class="item-restricted" contenteditable="false">[R] - ITEM IS RESTRICTED</div>
+    
+    <footer class="footer" contenteditable="false">NW 78141 DocId:32201322 Page 1</footer>
